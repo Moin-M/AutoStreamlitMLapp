@@ -12,7 +12,7 @@ if os.path.exists('./dataset.csv'):
 
 with st.sidebar: 
     st.image("https://www.onepointltd.com/wp-content/uploads/2020/03/inno2.png")
-    st.title("AutoNickML")
+    st.title("AutoMoinML")
     choice = st.radio("Navigation", ["Upload","Profiling","Modelling", "Download"])
     st.info("This project application helps you build and explore your data.")
 
@@ -32,13 +32,14 @@ if choice == "Profiling":
 if choice == "Modelling": 
     chosen_target = st.selectbox('Choose the Target Column', df.columns)
     if st.button('Run Modelling'): 
-        setup(df, target=chosen_target, silent=True)
+        setup(df, target=chosen_target)
         setup_df = pull()
         st.dataframe(setup_df)
         best_model = compare_models()
         compare_df = pull()
         st.dataframe(compare_df)
         save_model(best_model, 'best_model')
+        
 
 if choice == "Download": 
     with open('best_model.pkl', 'rb') as f: 
